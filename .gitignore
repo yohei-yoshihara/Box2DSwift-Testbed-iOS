@@ -1,0 +1,53 @@
+# .gitignore
+# 1) '/'を含まないパターンは、.gitignore以下にあるすべてのディレクトリにおいて、この名前のファイルとディレクトリを除外する。
+# 2) 先頭もしくは中間に'/'を含むパターンは、.gitignoreを基点とする相対パスと判断され、マッチするファイルやディレクトリを除外する。
+# 3) 末尾に'/'を含むパターンは、任意の階層にあるこの名前のディレクトリを除外する。
+# 4) '*'はスラッシュ以外の任意も文字列にマッチする。
+# 5) '?'はスラッシュ以外の任意の文字にマッチする。
+# 6) '[a-zA-Z]'といった範囲指定もできる。
+# 7) '**'は任意の階層のディレクトリにマッチする。
+
+UserInterfaceState.xcuserstate
+*.xcuserstate
+# Exclude the build directory
+build/*
+depends/*
+ 
+# Exclude temp nibs and swap files
+*~.nib
+*.swp
+ 
+# Exclude OS X folder attributes
+.DS_Store
+ 
+# Exclude user-specific XCode 3 and 4 files
+*.mode1
+*.mode1v3
+*.mode2v3
+*.perspective
+*.perspectivev3
+*.pbxuser
+*.xcworkspace
+xcuserdata/
+
+# python mypy cache
+.mypy_cache/
+
+*~
+\#*\#
+
+/vendor/
+*.sqlite
+.vscode/*
+
+node_modules/
+.npm/
+
+*.log
+
+__pycache__/
+
+Debug/
+Release/
+.clangd/
+.cache/
