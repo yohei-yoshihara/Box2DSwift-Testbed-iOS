@@ -24,64 +24,64 @@ This version of box2d was developed by Yohei Yoshihara. It is based upon
 the original C++ code written by Erin Catto.
 */
 
-import UIKit
 import QuartzCore
+import Metal
+import MetalKit
 import Box2D
-import OpenGLES
-import GLKit
 
-class RenderView: UIView, b2Draw {
+protocol RenderViewDelegate: AnyObject {
+  func simulationLoop(renderView: RenderView)
+}
+
+class RenderView: UIView, MTKViewDelegate, b2Draw {
+  weak var delegate: RenderViewDelegate?
+  
+  var metalKitView: MTKView
   var renderer: Renderer!
-  var vertexData = [Vertex]()
+  var vertexData = [SIMD2<Float>]()
   var left: b2Float = -1
   var right: b2Float = 1
   var bottom: b2Float = -1
   var top: b2Float = 1
   
-  override class var layerClass : AnyClass {
-    return CAEAGLLayer.self
-  }
-  
   override init(frame: CGRect) {
+    metalKitView = MTKView(frame: frame, device: MTLCreateSystemDefaultDevice())
     super.init(frame: frame)
     
-    // Get the layer
-    let eaglLayer = self.layer as! CAEAGLLayer
-    
-    // set content scale
-    self.contentScaleFactor = UIScreen.main.scale
-    eaglLayer.contentsScale = UIScreen.main.scale
-    
-    // set opaque is NO
-    self.isOpaque = false
-    eaglLayer.isOpaque = false
-    
-    // retained backing is YES
-    eaglLayer.drawableProperties = [kEAGLDrawablePropertyColorFormat:kEAGLColorFormatRGBA8]
-    
-    renderer = Renderer()
+    metalKitView.translatesAutoresizingMaskIntoConstraints = false
+    addSubview(metalKitView)
+    NSLayoutConstraint.activate([
+      metalKitView.topAnchor.constraint(equalTo: topAnchor),
+      metalKitView.leadingAnchor.constraint(equalTo: leadingAnchor),
+      bottomAnchor.constraint(equalTo: metalKitView.bottomAnchor),
+      trailingAnchor.constraint(equalTo: metalKitView.trailingAnchor),
+    ])
+    renderer = Renderer(metalKitView: metalKitView)
+    metalKitView.delegate = self
   }
   
   required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
+    fatalError("not supported")
   }
   
   deinit {
   }
-  
-  override func layoutSubviews() {
-    if renderer.resizeFromLayer(self.layer as! CAEAGLLayer) == false {
-      Swift.print("resizeFromLayer failed")
-    }
+
+  func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+    renderer.mtkView(view, drawableSizeWillChange: size)
   }
   
-  func preRender() {
-    renderer.preRender()
+  func draw(in view: MTKView) {
+    renderer.preRender(in: view)
     renderer.setOrtho2D(left: left, right: right, bottom: bottom, top: top)
+    delegate?.simulationLoop(renderView: self)
+    renderer.postRender(in: view)
+  }
+
+  func preRender() {
   }
   
   func postRender() {
-    renderer.postRender()
   }
   
   func setOrtho2D(left: b2Float, right: b2Float, bottom: b2Float, top: b2Float) {
@@ -94,7 +94,7 @@ class RenderView: UIView, b2Draw {
   // MARK: - b2Draw
   
   /// Set the drawing flags.
-  func SetFlags(_ flags : UInt32) {
+  func setFlags(_ flags : UInt32) {
     m_drawFlags = flags
   }
   
@@ -119,27 +119,25 @@ class RenderView: UIView, b2Draw {
   func drawPolygon(_ vertices: [b2Vec2], _ color: b2Color) {
     vertexData.removeAll(keepingCapacity: true)
     for v in vertices {
-      vertexData.append(Vertex(x: v.x, y: v.y))
+      vertexData.append(SIMD2<Float>(v.x, v.y))
     }
     renderer.setColor(red: color.r, green: color.g, blue: color.b, alpha: 1.0)
-    renderer.setVertexData(&vertexData)
-    renderer.draw(GL_LINE_LOOP, count: vertexData.count)
+    renderer.draw(mode: .lineLoop, vertices: vertexData)
   }
   
   /// Draw a solid closed polygon provided in CCW order.
   func drawSolidPolygon(_ vertices: [b2Vec2], _ color: b2Color) {
     vertexData.removeAll(keepingCapacity: true)
     for v in vertices {
-      vertexData.append(Vertex(x: v.x, y: v.y))
+      vertexData.append(SIMD2<Float>(v.x, v.y))
     }
-    renderer.setVertexData(&vertexData)
     renderer.enableBlend()
     renderer.setColor(red: 0.5 * color.r, green: 0.5 * color.g, blue: 0.5 * color.b, alpha: 0.5)
-    renderer.draw(GL_TRIANGLE_FAN, count: vertexData.count)
+    renderer.draw(mode: .triangleFan, vertices: vertexData)
     renderer.disableBlend()
     
     renderer.setColor(red: color.r, green: color.g, blue: color.b, alpha: 1.0)
-    renderer.draw(GL_LINE_LOOP, count: vertexData.count)
+    renderer.draw(mode: .lineLoop, vertices: vertexData)
   }
   
   /// Draw a circle.
@@ -150,12 +148,11 @@ class RenderView: UIView, b2Draw {
     vertexData.removeAll(keepingCapacity: true)
     for _ in 0 ..< k_segments {
       let v = center + radius * b2Vec2(cosf(theta), sinf(theta))
-      vertexData.append(Vertex(x: v.x, y: v.y))
+      vertexData.append(SIMD2<Float>(v.x, v.y))
       theta += k_increment
     }
     renderer.setColor(red: color.r, green: color.g, blue: color.b, alpha: 1.0)
-    renderer.setVertexData(&vertexData)
-    renderer.draw(GL_LINE_LOOP, count: vertexData.count)
+    renderer.draw(mode: .lineLoop, vertices: vertexData)
   }
   
   /// Draw a solid circle.
@@ -166,37 +163,34 @@ class RenderView: UIView, b2Draw {
     vertexData.removeAll(keepingCapacity: true)
     for _ in 0 ..< k_segments {
       let v = center + radius * b2Vec2(cosf(theta), sinf(theta))
-      vertexData.append(Vertex(x: v.x, y: v.y))
+      vertexData.append(SIMD2<Float>(v.x, v.y))
       theta += k_increment
     }
-    renderer.setVertexData(&vertexData)
     
     renderer.enableBlend()
     renderer.setColor(red: 0.5 * color.r, green: 0.5 * color.g, blue: 0.5 * color.b, alpha: 0.5)
-    renderer.draw(GL_TRIANGLE_FAN, count: vertexData.count)
+    renderer.draw(mode: .triangleFan, vertices: vertexData)
     renderer.disableBlend()
 
     renderer.setColor(red: color.r, green: color.g, blue: color.b, alpha: 1.0)
-    renderer.draw(GL_LINE_LOOP, count: vertexData.count)
+    renderer.draw(mode: .lineLoop, vertices: vertexData)
     
     let p = center + radius * axis
     vertexData.removeAll(keepingCapacity: true)
-    vertexData.append(Vertex(x: center.x, y: center.y))
-    vertexData.append(Vertex(x: p.x, y: p.y))
-    renderer.setVertexData(&vertexData)
+    vertexData.append(SIMD2<Float>(center.x, center.y))
+    vertexData.append(SIMD2<Float>(p.x, p.y))
     
     renderer.setColor(red: color.r, green: color.g, blue: color.b, alpha: 1.0)
-    renderer.draw(GL_LINES, count: vertexData.count)
+    renderer.draw(mode: .lines, vertices: vertexData)
   }
   
   /// Draw a line segment.
   func drawSegment(_ p1: b2Vec2, _ p2: b2Vec2, _ color: b2Color) {
     vertexData.removeAll(keepingCapacity: true)
-    vertexData.append(Vertex(x: p1.x, y: p1.y))
-    vertexData.append(Vertex(x: p2.x, y: p2.y))
-    renderer.setVertexData(&vertexData)
+    vertexData.append(SIMD2<Float>(p1.x, p1.y))
+    vertexData.append(SIMD2<Float>(p2.x, p2.y))
     renderer.setColor(red: color.r, green: color.g, blue: color.b, alpha: 1.0)
-    renderer.draw(GL_LINES, count: vertexData.count)
+    renderer.draw(mode: .lines, vertices: vertexData)
   }
   
   /// Draw a transform. Choose your own length scale.
@@ -206,41 +200,37 @@ class RenderView: UIView, b2Draw {
     var p2: b2Vec2
     let k_axisScale: b2Float = 0.4
     vertexData.removeAll(keepingCapacity: true)
-    vertexData.append(Vertex(x: p1.x, y: p1.y))
+    vertexData.append(SIMD2<Float>(p1.x, p1.y))
     p2 = p1 + k_axisScale * xf.q.xAxis
-    vertexData.append(Vertex(x: p2.x, y: p2.y))
-    renderer.setVertexData(&vertexData)
+    vertexData.append(SIMD2<Float>(p2.x, p2.y))
     renderer.setColor(red: 1, green: 0, blue: 0, alpha: 1.0)
-    renderer.draw(GL_LINES, count: vertexData.count)
+    renderer.draw(mode: .lines, vertices: vertexData)
     
     vertexData.removeAll(keepingCapacity: true)
-    vertexData.append(Vertex(x: p1.x, y: p1.y))
+    vertexData.append(SIMD2<Float>(p1.x, p1.y))
     p2 = p1 + k_axisScale * xf.q.yAxis
-    vertexData.append(Vertex(x: p2.x, y: p2.y))
-    renderer.setVertexData(&vertexData)
+    vertexData.append(SIMD2<Float>(p2.x, p2.y))
     renderer.setColor(red: 0, green: 1, blue: 0, alpha: 1.0)
-    renderer.draw(GL_LINES, count: vertexData.count)
+    renderer.draw(mode: .lines, vertices: vertexData)
   }
   
   func drawPoint(_ p: b2Vec2, _ size: b2Float, _ color: b2Color) {
     vertexData.removeAll(keepingCapacity: true)
-    vertexData.append(Vertex(x: p.x, y: p.y))
-    renderer.setVertexData(&vertexData)
+    vertexData.append(SIMD2<Float>(p.x, p.y))
     renderer.setColor(red: color.r, green: color.g, blue: color.b, alpha: 1.0)
     renderer.setPointSize(size)
-    renderer.draw(GL_POINTS, count: 1)
+    renderer.draw(mode: .points, vertices: vertexData)
     renderer.setPointSize(0)
   }
   
   func drawAABB(_ aabb: b2AABB, _ color: b2Color) {
     vertexData.removeAll(keepingCapacity: true)
-    vertexData.append(Vertex(x: aabb.lowerBound.x, y: aabb.lowerBound.y))
-    vertexData.append(Vertex(x: aabb.upperBound.x, y: aabb.lowerBound.y))
-    vertexData.append(Vertex(x: aabb.upperBound.x, y: aabb.upperBound.y))
-    vertexData.append(Vertex(x: aabb.lowerBound.x, y: aabb.upperBound.y))
-    renderer.setVertexData(&vertexData)
+    vertexData.append(SIMD2<Float>(aabb.lowerBound.x, aabb.lowerBound.y))
+    vertexData.append(SIMD2<Float>(aabb.upperBound.x, aabb.lowerBound.y))
+    vertexData.append(SIMD2<Float>(aabb.upperBound.x, aabb.upperBound.y))
+    vertexData.append(SIMD2<Float>(aabb.lowerBound.x, aabb.upperBound.y))
     renderer.setColor(red: color.r, green: color.g, blue: color.b, alpha: 1.0)
-    renderer.draw(GL_LINE_LOOP, count: vertexData.count)
+    renderer.draw(mode: .lineLoop, vertices: vertexData)
   }
   
   var m_drawFlags : UInt32 = 0

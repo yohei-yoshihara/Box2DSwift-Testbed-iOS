@@ -222,9 +222,9 @@ class PolyShapesViewController: BaseViewController, TextListViewControllerDelega
 		let bd = b2BodyDef()
 		bd.type = b2BodyType.dynamicBody
   
-		let x = RandomFloat(-2.0, 2.0)
+		let x = randomFloat(-2.0, 2.0)
 		bd.position.set(x, 10.0)
-		bd.angle = RandomFloat(-b2_pi, b2_pi)
+		bd.angle = randomFloat(-b2_pi, b2_pi)
   
 		if index == 4 {
       bd.angularDamping = 0.02

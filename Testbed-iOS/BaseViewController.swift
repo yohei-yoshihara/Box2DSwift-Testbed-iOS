@@ -27,20 +27,21 @@ the original C++ code written by Erin Catto.
 import UIKit
 import Box2D
 
-class BaseViewController: UIViewController, SettingViewControllerDelegate {
-  var settings: Settings!
-  var displayLink: CADisplayLink!
-  var debugDraw: RenderView!
-  var infoView: InfoView!
+class BaseViewController: UIViewController, SettingViewControllerDelegate, RenderViewDelegate {
+  lazy var settings = Settings()
+  lazy var debugDraw = RenderView(frame: .zero)
+  lazy var infoView = InfoView(frame: .zero)
+  lazy var settingsVC = SettingViewController()
   var stepCount = 0
   var contactListener: ContactListener!
   var world: b2World!
-  var settingsVC: SettingViewController!
   var bombLauncher: BombLauncher!
-  var mouseJoint: b2MouseJoint? = nil
+  var mouseJoint: b2MouseJoint?
   var groundBody: b2Body!
-  var panGestureRecognizer: UIPanGestureRecognizer!
-  var tapGestureRecognizer: UITapGestureRecognizer!
+  lazy var panGestureRecognizer = UIPanGestureRecognizer(target: self, 
+                                                         action: #selector(onPan))
+  lazy var tapGestureRecognizer = UITapGestureRecognizer(target: self, 
+                                                         action: #selector(onTap))
   
   init() {
     super.init(nibName: nil, bundle: nil)
@@ -56,22 +57,29 @@ class BaseViewController: UIViewController, SettingViewControllerDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    settings = Settings()
-    settingsVC = SettingViewController()
-    
-    debugDraw = RenderView(frame: CalculateRenderViewFrame(self.view))
-    debugDraw.autoresizingMask = UIView.AutoresizingMask()
-    debugDraw.SetFlags(settings.debugDrawFlag)
+    debugDraw.translatesAutoresizingMaskIntoConstraints = false
+    debugDraw.setFlags(settings.debugDrawFlag)
     self.view.addSubview(debugDraw)
+    NSLayoutConstraint.activate([
+      debugDraw.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      debugDraw.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+      view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: debugDraw.bottomAnchor),
+      view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: debugDraw.trailingAnchor),
+    ])
     
-    infoView = InfoView(frame: CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height))
-    infoView.autoresizingMask = [UIView.AutoresizingMask.flexibleWidth, UIView.AutoresizingMask.flexibleHeight]
+    infoView.translatesAutoresizingMaskIntoConstraints = false
     self.view.addSubview(infoView)
-
+    NSLayoutConstraint.activate([
+      infoView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      infoView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+      view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: infoView.bottomAnchor),
+      view.safeAreaLayoutGuide.trailingAnchor.constraint(equalTo: infoView.trailingAnchor),
+    ])
+    
     let pauseButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.pause,
-      target: self, action: #selector(BaseViewController.onPause(_:)))
+                                      target: self, action: #selector(onPause))
     let singleStepButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.play,
-      target: self, action: #selector(BaseViewController.onSingleStep(_:)))
+                                           target: self, action: #selector(onSingleStep))
     let flexibleButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
     self.toolbarItems = [
       flexibleButton, pauseButton,
@@ -79,14 +87,15 @@ class BaseViewController: UIViewController, SettingViewControllerDelegate {
       flexibleButton
     ]
     
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", style: UIBarButtonItem.Style.plain, target: self, action: #selector(BaseViewController.onSettings(_:)))
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Settings", 
+                                                             style: UIBarButtonItem.Style.plain,
+                                                             target: self,
+                                                             action: #selector(onSettings))
     
-    panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(BaseViewController.onPan(_:)))
     debugDraw.addGestureRecognizer(panGestureRecognizer)
-    tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(BaseViewController.onTap(_:)))
     debugDraw.addGestureRecognizer(tapGestureRecognizer)
   }
-
+  
   func addToolbarItems(_ additionalToolbarItems: [UIBarButtonItem]) {
     var toolbarItems = [UIBarButtonItem]()
     toolbarItems += self.toolbarItems!
@@ -114,34 +123,26 @@ class BaseViewController: UIViewController, SettingViewControllerDelegate {
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    displayLink = CADisplayLink(target: self, selector: #selector(BaseViewController.simulationLoop))
-    displayLink.preferredFramesPerSecond = Int(settings.hz)
-    displayLink.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
+    debugDraw.delegate = self
+    debugDraw.backgroundColor = .blue
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     if checkBackButton(self) {
-      displayLink.invalidate()
-      displayLink = nil
-      
+      debugDraw.delegate = nil
       world = nil
       bombLauncher = nil
       contactListener = nil
     }
   }
-
-  override func viewDidLayoutSubviews() {
-    debugDraw.frame = CalculateRenderViewFrame(self.view)
-    let (lower, upper) = settings.calcViewBounds()
-    debugDraw.setOrtho2D(left: lower.x, right: upper.x, bottom: lower.y, top: upper.y)
-  }
   
   func prepare() {
   }
   
-  @objc func simulationLoop() {
-    print("\(#function) \(CACurrentMediaTime())")
+  @objc func simulationLoop(renderView: RenderView) {
+    updateCoordinate()
     debugDraw.preRender()
+    
     bombLauncher.render()
     let timeStep = settings.calcTimeStep()
     settings.apply(world)
@@ -157,7 +158,7 @@ class BaseViewController: UIViewController, SettingViewControllerDelegate {
     contactListener.drawContactPoints(settings, renderView: debugDraw)
     
     step()
-    
+
     debugDraw.postRender()
   }
   
@@ -182,18 +183,18 @@ class BaseViewController: UIViewController, SettingViewControllerDelegate {
     popPC?.permittedArrowDirections = UIPopoverArrowDirection.any
     self.present(settingsVC, animated: true, completion: nil)
   }
-
+  
   func didSettingsChanged(_ settings: Settings) {
     self.settings = settings
     infoView.enableProfile = settings.drawProfile
     infoView.enableStats = settings.drawStats
-    displayLink.preferredFramesPerSecond = Int(settings.hz)
-    debugDraw.SetFlags(settings.debugDrawFlag)
+    debugDraw.metalKitView.preferredFramesPerSecond = Int(settings.hz)
+    debugDraw.setFlags(settings.debugDrawFlag)
   }
-
+  
   @objc func onPan(_ gr: UIPanGestureRecognizer) {
     let p = gr.location(in: debugDraw)
-    let wp = ConvertScreenToWorld(p, size: debugDraw.bounds.size, viewCenter: settings.viewCenter)
+    let wp = convertScreenToWorld(p, size: debugDraw.bounds.size, viewCenter: settings.viewCenter)
     
     switch gr.state {
     case .began:
@@ -242,6 +243,13 @@ class BaseViewController: UIViewController, SettingViewControllerDelegate {
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
+  }
+  
+  func updateCoordinate() {
+    let (lower, upper) = calcViewBounds(viewSize: debugDraw.bounds.size,
+                                        viewCenter: settings.viewCenter,
+                                        extents: Settings.extents)
+    debugDraw.setOrtho2D(left: lower.x, right: upper.x, bottom: lower.y, top: upper.y)
   }
 }
+

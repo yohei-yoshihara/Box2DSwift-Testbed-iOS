@@ -194,15 +194,15 @@ class DynamicTreeTestViewController: BaseViewController, b2QueryWrapper, b2RayCa
     let w = b2Vec2(2.0 * proxyExtent, 2.0 * proxyExtent)
     //aabb->lowerBound.x = -proxyExtent;
     //aabb->lowerBound.y = -proxyExtent + worldExtent;
-    aabb.lowerBound.x = RandomFloat(-worldExtent, worldExtent)
-    aabb.lowerBound.y = RandomFloat(0.0, 2.0 * worldExtent)
+    aabb.lowerBound.x = randomFloat(-worldExtent, worldExtent)
+    aabb.lowerBound.y = randomFloat(0.0, 2.0 * worldExtent)
     aabb.upperBound = aabb.lowerBound + w
   }
   
   func MoveAABB(_ aabb: inout b2AABB) {
     var d = b2Vec2()
-    d.x = RandomFloat(-0.5, 0.5)
-    d.y = RandomFloat(-0.5, 0.5)
+    d.x = randomFloat(-0.5, 0.5)
+    d.y = randomFloat(-0.5, 0.5)
     //d.x = 2.0f;
     //d.y = 0.0f;
     aabb.lowerBound += d

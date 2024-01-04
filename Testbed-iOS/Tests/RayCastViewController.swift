@@ -287,11 +287,11 @@ class RayCastViewController: BaseViewController, TextListViewControllerDelegate 
   
   func create(_ index: Int) {
     let bd = b2BodyDef()
-    let x = RandomFloat(-10.0, 10.0)
+    let x = randomFloat(-10.0, 10.0)
     assert(x >= -10.0 && x <= 10.0)
-    let y = RandomFloat(0.0, 20.0)
+    let y = randomFloat(0.0, 20.0)
     bd.position.set(x, y)
-    bd.angle = RandomFloat(-b2_pi, b2_pi)
+    bd.angle = randomFloat(-b2_pi, b2_pi)
     bd.userData = NSNumber(value: index as Int)
     
     if index == 4 {

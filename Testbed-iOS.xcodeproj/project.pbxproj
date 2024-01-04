@@ -7,9 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		478692842B46404800DC1D45 /* Testbed_iOS_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478692832B46404800DC1D45 /* Testbed_iOS_Tests.swift */; };
+		47887B382B46287800E23E80 /* Shader.metal in Sources */ = {isa = PBXBuildFile; fileRef = 47887B342B46287800E23E80 /* Shader.metal */; };
+		47887B392B46287800E23E80 /* RenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47887B362B46287800E23E80 /* RenderView.swift */; };
+		47887B3A2B46287800E23E80 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47887B372B46287800E23E80 /* Renderer.swift */; };
 		47924C2E2B4536E1003CFF87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924C2D2B4536E1003CFF87 /* AppDelegate.swift */; };
 		47924C302B4536E1003CFF87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924C2F2B4536E1003CFF87 /* SceneDelegate.swift */; };
-		47924C322B4536E1003CFF87 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924C312B4536E1003CFF87 /* ViewController.swift */; };
 		47924C352B4536E1003CFF87 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47924C332B4536E1003CFF87 /* Main.storyboard */; };
 		47924C372B4536E2003CFF87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47924C362B4536E2003CFF87 /* Assets.xcassets */; };
 		47924C3A2B4536E2003CFF87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47924C382B4536E2003CFF87 /* LaunchScreen.storyboard */; };
@@ -17,7 +20,6 @@
 		47924CC52B453EA5003CFF87 /* render.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 47924C852B453EA4003CFF87 /* render.vsh */; };
 		47924CC62B453EA5003CFF87 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924C862B453EA4003CFF87 /* Helper.swift */; };
 		47924CC72B453EA5003CFF87 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924C872B453EA4003CFF87 /* SettingViewController.swift */; };
-		47924CC82B453EA5003CFF87 /* RenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924C882B453EA4003CFF87 /* RenderView.swift */; };
 		47924CC92B453EA5003CFF87 /* BombLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924C892B453EA4003CFF87 /* BombLauncher.swift */; };
 		47924CCA2B453EA5003CFF87 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47924C8A2B453EA4003CFF87 /* SwitchCell.xib */; };
 		47924CCB2B453EA5003CFF87 /* IterationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47924C8B2B453EA4003CFF87 /* IterationCell.xib */; };
@@ -74,16 +76,31 @@
 		47924CFE2B453EA5003CFF87 /* BulletTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924CBF2B453EA5003CFF87 /* BulletTestViewController.swift */; };
 		47924CFF2B453EA5003CFF87 /* AdditionalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924CC02B453EA5003CFF87 /* AdditionalInfoView.swift */; };
 		47924D002B453EA5003CFF87 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924CC12B453EA5003CFF87 /* InfoView.swift */; };
-		47924D012B453EA5003CFF87 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924CC22B453EA5003CFF87 /* Renderer.swift */; };
 		47924D022B453EA5003CFF87 /* render.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 47924CC32B453EA5003CFF87 /* render.fsh */; };
 		47924D032B453EA5003CFF87 /* TextListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924CC42B453EA5003CFF87 /* TextListViewController.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		478692852B46404800DC1D45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 47924C222B4536E1003CFF87 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 47924C292B4536E1003CFF87;
+			remoteInfo = "Testbed-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		478692812B46404800DC1D45 /* Testbed-iOS-Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Testbed-iOS-Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		478692832B46404800DC1D45 /* Testbed_iOS_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Testbed_iOS_Tests.swift; sourceTree = "<group>"; };
+		47887B342B46287800E23E80 /* Shader.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = Shader.metal; sourceTree = "<group>"; };
+		47887B352B46287800E23E80 /* Common.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
+		47887B362B46287800E23E80 /* RenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderView.swift; sourceTree = "<group>"; };
+		47887B372B46287800E23E80 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		47887B3B2B46288E00E23E80 /* Testbed-iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Testbed-iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		47924C2A2B4536E1003CFF87 /* Testbed-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Testbed-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47924C2D2B4536E1003CFF87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47924C2F2B4536E1003CFF87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		47924C312B4536E1003CFF87 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		47924C342B4536E1003CFF87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		47924C362B4536E2003CFF87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		47924C392B4536E2003CFF87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -91,7 +108,6 @@
 		47924C852B453EA4003CFF87 /* render.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = render.vsh; sourceTree = "<group>"; };
 		47924C862B453EA4003CFF87 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		47924C872B453EA4003CFF87 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
-		47924C882B453EA4003CFF87 /* RenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderView.swift; sourceTree = "<group>"; };
 		47924C892B453EA4003CFF87 /* BombLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombLauncher.swift; sourceTree = "<group>"; };
 		47924C8A2B453EA4003CFF87 /* SwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
 		47924C8B2B453EA4003CFF87 /* IterationCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IterationCell.xib; sourceTree = "<group>"; };
@@ -148,12 +164,18 @@
 		47924CBF2B453EA5003CFF87 /* BulletTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletTestViewController.swift; sourceTree = "<group>"; };
 		47924CC02B453EA5003CFF87 /* AdditionalInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalInfoView.swift; sourceTree = "<group>"; };
 		47924CC12B453EA5003CFF87 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		47924CC22B453EA5003CFF87 /* Renderer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		47924CC32B453EA5003CFF87 /* render.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = render.fsh; sourceTree = "<group>"; };
 		47924CC42B453EA5003CFF87 /* TextListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4786927E2B46404800DC1D45 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47924C272B4536E1003CFF87 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -165,10 +187,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		478692822B46404800DC1D45 /* Testbed-iOS-Tests */ = {
+			isa = PBXGroup;
+			children = (
+				478692832B46404800DC1D45 /* Testbed_iOS_Tests.swift */,
+			);
+			path = "Testbed-iOS-Tests";
+			sourceTree = "<group>";
+		};
+		47887B332B46287800E23E80 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				47887B362B46287800E23E80 /* RenderView.swift */,
+				47887B372B46287800E23E80 /* Renderer.swift */,
+				47887B342B46287800E23E80 /* Shader.metal */,
+				47887B352B46287800E23E80 /* Common.h */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
 		47924C212B4536E1003CFF87 = {
 			isa = PBXGroup;
 			children = (
 				47924C2C2B4536E1003CFF87 /* Testbed-iOS */,
+				478692822B46404800DC1D45 /* Testbed-iOS-Tests */,
 				47924C2B2B4536E1003CFF87 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -177,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				47924C2A2B4536E1003CFF87 /* Testbed-iOS.app */,
+				478692812B46404800DC1D45 /* Testbed-iOS-Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,17 +229,15 @@
 			children = (
 				47924C2D2B4536E1003CFF87 /* AppDelegate.swift */,
 				47924C2F2B4536E1003CFF87 /* SceneDelegate.swift */,
-				47924C312B4536E1003CFF87 /* ViewController.swift */,
 				47924C8D2B453EA5003CFF87 /* MenuViewController.swift */,
 				47924CC02B453EA5003CFF87 /* AdditionalInfoView.swift */,
 				47924C8E2B453EA5003CFF87 /* BaseViewController.swift */,
 				47924C892B453EA4003CFF87 /* BombLauncher.swift */,
 				47924C862B453EA4003CFF87 /* Helper.swift */,
 				47924CC12B453EA5003CFF87 /* InfoView.swift */,
-				47924CC22B453EA5003CFF87 /* Renderer.swift */,
-				47924C882B453EA4003CFF87 /* RenderView.swift */,
 				47924C872B453EA4003CFF87 /* SettingViewController.swift */,
 				47924CC42B453EA5003CFF87 /* TextListViewController.swift */,
+				47887B332B46287800E23E80 /* Renderer */,
 				47924C8F2B453EA5003CFF87 /* Tests */,
 				47924CC32B453EA5003CFF87 /* render.fsh */,
 				47924C852B453EA4003CFF87 /* render.vsh */,
@@ -207,6 +248,7 @@
 				47924C362B4536E2003CFF87 /* Assets.xcassets */,
 				47924C382B4536E2003CFF87 /* LaunchScreen.storyboard */,
 				47924C3B2B4536E2003CFF87 /* Info.plist */,
+				47887B3B2B46288E00E23E80 /* Testbed-iOS-Bridging-Header.h */,
 			);
 			path = "Testbed-iOS";
 			sourceTree = "<group>";
@@ -269,6 +311,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		478692802B46404800DC1D45 /* Testbed-iOS-Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 478692892B46404800DC1D45 /* Build configuration list for PBXNativeTarget "Testbed-iOS-Tests" */;
+			buildPhases = (
+				4786927D2B46404800DC1D45 /* Sources */,
+				4786927E2B46404800DC1D45 /* Frameworks */,
+				4786927F2B46404800DC1D45 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				478692862B46404800DC1D45 /* PBXTargetDependency */,
+			);
+			name = "Testbed-iOS-Tests";
+			productName = "Testbed-iOS-Tests";
+			productReference = 478692812B46404800DC1D45 /* Testbed-iOS-Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		47924C292B4536E1003CFF87 /* Testbed-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 47924C3E2B4536E2003CFF87 /* Build configuration list for PBXNativeTarget "Testbed-iOS" */;
@@ -299,8 +359,13 @@
 				LastSwiftUpdateCheck = 1510;
 				LastUpgradeCheck = 1510;
 				TargetAttributes = {
+					478692802B46404800DC1D45 = {
+						CreatedOnToolsVersion = 15.1;
+						TestTargetID = 47924C292B4536E1003CFF87;
+					};
 					47924C292B4536E1003CFF87 = {
 						CreatedOnToolsVersion = 15.1;
+						LastSwiftMigration = 1510;
 					};
 				};
 			};
@@ -321,11 +386,19 @@
 			projectRoot = "";
 			targets = (
 				47924C292B4536E1003CFF87 /* Testbed-iOS */,
+				478692802B46404800DC1D45 /* Testbed-iOS-Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		4786927F2B46404800DC1D45 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47924C282B4536E1003CFF87 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -344,6 +417,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4786927D2B46404800DC1D45 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				478692842B46404800DC1D45 /* Testbed_iOS_Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		47924C262B4536E1003CFF87 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -360,10 +441,8 @@
 				47924CD82B453EA5003CFF87 /* SensorTestViewController.swift in Sources */,
 				47924CF92B453EA5003CFF87 /* GearViewController.swift in Sources */,
 				47924CF32B453EA5003CFF87 /* ChainViewController.swift in Sources */,
-				47924C322B4536E1003CFF87 /* ViewController.swift in Sources */,
 				47924CF62B453EA5003CFF87 /* ShapeEditingViewController.swift in Sources */,
 				47924CFB2B453EA5003CFF87 /* CharacterCollisionViewController.swift in Sources */,
-				47924CC82B453EA5003CFF87 /* RenderView.swift in Sources */,
 				47924CE02B453EA5003CFF87 /* EdgeShapesViewController.swift in Sources */,
 				47924D002B453EA5003CFF87 /* InfoView.swift in Sources */,
 				47924CEE2B453EA5003CFF87 /* CollisionFilteringViewController.swift in Sources */,
@@ -376,10 +455,10 @@
 				47924CD72B453EA5003CFF87 /* TheoJansenViewController.swift in Sources */,
 				47924CFC2B453EA5003CFF87 /* TimeOfImpactViewController.swift in Sources */,
 				47924CD62B453EA5003CFF87 /* RevoluteViewController.swift in Sources */,
-				47924D012B453EA5003CFF87 /* Renderer.swift in Sources */,
 				47924CEB2B453EA5003CFF87 /* MobileBalancedViewController.swift in Sources */,
 				47924CD12B453EA5003CFF87 /* TumblerViewController.swift in Sources */,
 				47924CF82B453EA5003CFF87 /* EdgeTestViewController.swift in Sources */,
+				47887B3A2B46287800E23E80 /* Renderer.swift in Sources */,
 				47924C302B4536E1003CFF87 /* SceneDelegate.swift in Sources */,
 				47924CF12B453EA5003CFF87 /* AddPairViewController.swift in Sources */,
 				47924CDF2B453EA5003CFF87 /* PrismaticViewController.swift in Sources */,
@@ -395,6 +474,7 @@
 				47924CC62B453EA5003CFF87 /* Helper.swift in Sources */,
 				47924CFF2B453EA5003CFF87 /* AdditionalInfoView.swift in Sources */,
 				47924D032B453EA5003CFF87 /* TextListViewController.swift in Sources */,
+				47887B392B46287800E23E80 /* RenderView.swift in Sources */,
 				47924CCF2B453EA5003CFF87 /* PulleysViewController.swift in Sources */,
 				47924CF02B453EA5003CFF87 /* BodyTypesViewController.swift in Sources */,
 				47924CDB2B453EA5003CFF87 /* CarViewController.swift in Sources */,
@@ -408,11 +488,20 @@
 				47924CC92B453EA5003CFF87 /* BombLauncher.swift in Sources */,
 				47924CD22B453EA5003CFF87 /* DominosViewController.swift in Sources */,
 				47924CE32B453EA5003CFF87 /* DynamicTreeTestViewController.swift in Sources */,
+				47887B382B46287800E23E80 /* Shader.metal in Sources */,
 				47924CCD2B453EA5003CFF87 /* MenuViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		478692862B46404800DC1D45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 47924C292B4536E1003CFF87 /* Testbed-iOS */;
+			targetProxy = 478692852B46404800DC1D45 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		47924C332B4536E1003CFF87 /* Main.storyboard */ = {
@@ -434,6 +523,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		478692872B46404800DC1D45 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 77KF4HLCS9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.yohei-yoshihara.Testbed-iOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Testbed-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Testbed-iOS";
+			};
+			name = Debug;
+		};
+		478692882B46404800DC1D45 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 77KF4HLCS9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MACOSX_DEPLOYMENT_TARGET = 14.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "io.github.yohei-yoshihara.Testbed-iOS-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Testbed-iOS.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Testbed-iOS";
+			};
+			name = Release;
+		};
 		47924C3C2B4536E2003CFF87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -558,6 +691,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 77KF4HLCS9;
@@ -576,6 +710,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.github.yohei-yoshihara.Box2DSwift.Testbed-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Testbed-iOS/Testbed-iOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -586,6 +722,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 77KF4HLCS9;
@@ -604,6 +741,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.github.yohei-yoshihara.Box2DSwift.Testbed-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Testbed-iOS/Testbed-iOS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -612,6 +750,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		478692892B46404800DC1D45 /* Build configuration list for PBXNativeTarget "Testbed-iOS-Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				478692872B46404800DC1D45 /* Debug */,
+				478692882B46404800DC1D45 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		47924C252B4536E1003CFF87 /* Build configuration list for PBXProject "Testbed-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

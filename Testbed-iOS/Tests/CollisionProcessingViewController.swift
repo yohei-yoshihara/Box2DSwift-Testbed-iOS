@@ -60,7 +60,7 @@ class CollisionProcessingViewController: BaseViewController {
     
     let triangleBodyDef = b2BodyDef()
     triangleBodyDef.type = b2BodyType.dynamicBody
-    triangleBodyDef.position.set(RandomFloat(xLo, xHi), RandomFloat(yLo, yHi))
+    triangleBodyDef.position.set(randomFloat(xLo, xHi), randomFloat(yLo, yHi))
     
     let body1 = world.createBody(triangleBodyDef)
     body1.createFixture(triangleShapeDef)
@@ -71,7 +71,7 @@ class CollisionProcessingViewController: BaseViewController {
     vertices[2] *= 2.0
     polygon.set(vertices: vertices)
     
-    triangleBodyDef.position.set(RandomFloat(xLo, xHi), RandomFloat(yLo, yHi))
+    triangleBodyDef.position.set(randomFloat(xLo, xHi), randomFloat(yLo, yHi))
     
     let body2 = world.createBody(triangleBodyDef)
     body2.createFixture(triangleShapeDef)
@@ -85,14 +85,14 @@ class CollisionProcessingViewController: BaseViewController {
     
     let boxBodyDef = b2BodyDef()
     boxBodyDef.type = b2BodyType.dynamicBody
-    boxBodyDef.position.set(RandomFloat(xLo, xHi), RandomFloat(yLo, yHi))
+    boxBodyDef.position.set(randomFloat(xLo, xHi), randomFloat(yLo, yHi))
     
     let body3 = world.createBody(boxBodyDef)
     body3.createFixture(boxShapeDef)
     
     // Large box (recycle definitions)
     polygon.setAsBox(halfWidth: 2.0, halfHeight: 1.0)
-    boxBodyDef.position.set(RandomFloat(xLo, xHi), RandomFloat(yLo, yHi))
+    boxBodyDef.position.set(randomFloat(xLo, xHi), randomFloat(yLo, yHi))
     
     let body4 = world.createBody(boxBodyDef)
     body4.createFixture(boxShapeDef)
@@ -107,14 +107,14 @@ class CollisionProcessingViewController: BaseViewController {
     
     let circleBodyDef = b2BodyDef()
     circleBodyDef.type = b2BodyType.dynamicBody
-    circleBodyDef.position.set(RandomFloat(xLo, xHi), RandomFloat(yLo, yHi))
+    circleBodyDef.position.set(randomFloat(xLo, xHi), randomFloat(yLo, yHi))
     
     let body5 = world.createBody(circleBodyDef)
     body5.createFixture(circleShapeDef)
     
     // Large circle
     circle.radius *= 2.0
-    circleBodyDef.position.set(RandomFloat(xLo, xHi), RandomFloat(yLo, yHi))
+    circleBodyDef.position.set(randomFloat(xLo, xHi), randomFloat(yLo, yHi))
     
     let body6 = world.createBody(circleBodyDef)
     body6.createFixture(circleShapeDef)

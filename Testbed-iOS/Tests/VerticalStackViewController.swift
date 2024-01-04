@@ -77,7 +77,7 @@ class VerticalStackViewController: BaseViewController {
         bd.userData = NSNumber(value: indices.last! as Int)
         
         let x: b2Float = 0.0
-        //float32 x = RandomFloat(-0.02f, 0.02f);
+        //float32 x = randomFloat(-0.02f, 0.02f);
         //float32 x = i % 2 == 0 ? -0.025f : 0.025f;
         bd.position.set(xs[j] + x, 0.752 + 1.54 * b2Float(i))
         let body = world.createBody(bd)

@@ -151,10 +151,10 @@ class EdgeShapesViewController: BaseViewController, TextListViewControllerDelega
 		}
   
 		let bd = b2BodyDef()
-		let x = RandomFloat(-10.0, 10.0)
-		let y = RandomFloat(10.0, 20.0)
+		let x = randomFloat(-10.0, 10.0)
+		let y = randomFloat(10.0, 20.0)
 		bd.position.set(x, y)
-		bd.angle = RandomFloat(-b2_pi, b2_pi)
+		bd.angle = randomFloat(-b2_pi, b2_pi)
 		bd.type = b2BodyType.dynamicBody
   
 		if index == 4 {
