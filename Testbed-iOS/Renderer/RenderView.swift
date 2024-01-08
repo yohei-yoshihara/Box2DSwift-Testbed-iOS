@@ -106,12 +106,12 @@ class RenderView: UIView, MTKViewDelegate, b2Draw {
   }
   
   /// Append flags to the current flags.
-  func AppendFlags(_ flags : UInt32) {
+  func appendFlags(_ flags : UInt32) {
     m_drawFlags |= flags
   }
   
   /// Clear flags from the current flags.
-  func ClearFlags(_ flags : UInt32) {
+  func clearFlags(_ flags : UInt32) {
     m_drawFlags &= ~flags
   }
   

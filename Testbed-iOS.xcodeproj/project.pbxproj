@@ -17,7 +17,6 @@
 		47924C372B4536E2003CFF87 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 47924C362B4536E2003CFF87 /* Assets.xcassets */; };
 		47924C3A2B4536E2003CFF87 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 47924C382B4536E2003CFF87 /* LaunchScreen.storyboard */; };
 		47924C432B453732003CFF87 /* Box2D in Frameworks */ = {isa = PBXBuildFile; productRef = 47924C422B453732003CFF87 /* Box2D */; };
-		47924CC52B453EA5003CFF87 /* render.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 47924C852B453EA4003CFF87 /* render.vsh */; };
 		47924CC62B453EA5003CFF87 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924C862B453EA4003CFF87 /* Helper.swift */; };
 		47924CC72B453EA5003CFF87 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924C872B453EA4003CFF87 /* SettingViewController.swift */; };
 		47924CC92B453EA5003CFF87 /* BombLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924C892B453EA4003CFF87 /* BombLauncher.swift */; };
@@ -76,7 +75,6 @@
 		47924CFE2B453EA5003CFF87 /* BulletTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924CBF2B453EA5003CFF87 /* BulletTestViewController.swift */; };
 		47924CFF2B453EA5003CFF87 /* AdditionalInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924CC02B453EA5003CFF87 /* AdditionalInfoView.swift */; };
 		47924D002B453EA5003CFF87 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924CC12B453EA5003CFF87 /* InfoView.swift */; };
-		47924D022B453EA5003CFF87 /* render.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 47924CC32B453EA5003CFF87 /* render.fsh */; };
 		47924D032B453EA5003CFF87 /* TextListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47924CC42B453EA5003CFF87 /* TextListViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -105,7 +103,6 @@
 		47924C362B4536E2003CFF87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		47924C392B4536E2003CFF87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		47924C3B2B4536E2003CFF87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		47924C852B453EA4003CFF87 /* render.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = render.vsh; sourceTree = "<group>"; };
 		47924C862B453EA4003CFF87 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		47924C872B453EA4003CFF87 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		47924C892B453EA4003CFF87 /* BombLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BombLauncher.swift; sourceTree = "<group>"; };
@@ -164,7 +161,6 @@
 		47924CBF2B453EA5003CFF87 /* BulletTestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletTestViewController.swift; sourceTree = "<group>"; };
 		47924CC02B453EA5003CFF87 /* AdditionalInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionalInfoView.swift; sourceTree = "<group>"; };
 		47924CC12B453EA5003CFF87 /* InfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
-		47924CC32B453EA5003CFF87 /* render.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = render.fsh; sourceTree = "<group>"; };
 		47924CC42B453EA5003CFF87 /* TextListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -239,8 +235,6 @@
 				47924CC42B453EA5003CFF87 /* TextListViewController.swift */,
 				47887B332B46287800E23E80 /* Renderer */,
 				47924C8F2B453EA5003CFF87 /* Tests */,
-				47924CC32B453EA5003CFF87 /* render.fsh */,
-				47924C852B453EA4003CFF87 /* render.vsh */,
 				47924C332B4536E1003CFF87 /* Main.storyboard */,
 				47924C8C2B453EA5003CFF87 /* HertzCell.xib */,
 				47924C8B2B453EA4003CFF87 /* IterationCell.xib */,
@@ -404,9 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47924C3A2B4536E2003CFF87 /* LaunchScreen.storyboard in Resources */,
-				47924D022B453EA5003CFF87 /* render.fsh in Resources */,
 				47924CCB2B453EA5003CFF87 /* IterationCell.xib in Resources */,
-				47924CC52B453EA5003CFF87 /* render.vsh in Resources */,
 				47924C372B4536E2003CFF87 /* Assets.xcassets in Resources */,
 				47924C352B4536E1003CFF87 /* Main.storyboard in Resources */,
 				47924CCC2B453EA5003CFF87 /* HertzCell.xib in Resources */,
