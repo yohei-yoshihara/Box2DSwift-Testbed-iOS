@@ -126,7 +126,6 @@ class CollisionProcessingViewController: BaseViewController {
     // because they may belong to multiple contact points.
     let k_maxNuke = 6
     var nuke = [b2Body]()
-    let nukeCount = 0
     
     // Traverse the contact results. Destroy bodies that
     // are touching heavier bodies.
@@ -146,7 +145,7 @@ class CollisionProcessingViewController: BaseViewController {
           nuke.append(body2)
         }
         
-        if nukeCount == k_maxNuke {
+        if nuke.count == k_maxNuke {
           break
         }
       }
